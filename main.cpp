@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 using namespace std;
 
 template <class type>
@@ -91,7 +90,6 @@ int main()
                 cin >> remove;
                 tr.Remove(remove);
                 break;
-
         }
     }
     return 0;
@@ -263,7 +261,7 @@ void AVLtree<type>::CheckBalance(Node<type>* ptr)
     }
     if(ptr->up != nullptr)
         CheckBalance(ptr->up);
-    else
+    else // czy ta linijka tutaj jest potrzebna?
         root = ptr;
 }
 
@@ -297,6 +295,7 @@ Node<type> *AVLtree<type>::FindKey(Node<type>* ptr,type key)
 template<class type>
 void AVLtree<type>::Remove(type key)
 {
+    Node<type>* checkBalanceFrom;
     Node<type>* ptr = FindKey(root,key);
     if(ptr != nullptr)
     {   /* wariant 1, brak dzieci */
@@ -304,10 +303,12 @@ void AVLtree<type>::Remove(type key)
         {
             if(ptr->up != nullptr) /* usuwanie 1 elementu, roota? */
             {
+                checkBalanceFrom = ptr->up;
                 if(ptr->up->left == ptr)
                     ptr->up->left = nullptr;
                 if(ptr->up->right == ptr)
                     ptr->up->right = nullptr;
+                CheckBalance(checkBalanceFrom);
             }
             else
                 root = nullptr;
@@ -315,20 +316,24 @@ void AVLtree<type>::Remove(type key)
         } /* ma jednego, prawego potomka */
         else if(ptr->left == nullptr && ptr->right != nullptr)
         {
+            checkBalanceFrom = ptr->up;
             if(ptr->up->right == ptr)
                 ptr->up->right = ptr->right;
             else
                 ptr->up->left = ptr->right;
             ptr->right->up = ptr->up;
+            CheckBalance(checkBalanceFrom);
             delete(ptr);
         } /* ma jednego, lewego potomka */
         else if(ptr->right == nullptr && ptr->left != nullptr)
         {
+            checkBalanceFrom = ptr->up;
             if(ptr->up->right == ptr)
                 ptr->up->right = ptr->left;
             else
                 ptr->up->left = ptr->left;
             ptr->left->up = ptr->up;
+            CheckBalance(checkBalanceFrom);
             delete(ptr);
         } /* ma dwoch potomkow */
         else
@@ -338,17 +343,23 @@ void AVLtree<type>::Remove(type key)
             {
                 tmp = tmp->right;
             }
+            checkBalanceFrom = tmp->up;
             type max = tmp->value;
+            if(tmp == ptr->right)
+                ptr->right = nullptr;
             if(tmp->left != nullptr)
             {
                 tmp->up->right = tmp->left;
                 tmp->left->up = tmp->up;
+                checkBalanceFrom = tmp->left;
                 delete(tmp);
             }
             ptr->value = max;
+            CheckBalance(checkBalanceFrom);
         }
     }
     else
         cout << " Brak elementu do usunięcia!" << endl;
 }
+
 
