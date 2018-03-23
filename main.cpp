@@ -2,9 +2,8 @@
 using namespace std;
 
 template <class type>
-class Node
+struct Node
 {
-public:
     type value;
     Node *right;
     Node *left;
@@ -22,21 +21,32 @@ public:
 template<class type>
 class AVLtree
 {
+    Node<type> *root;
     Node<type>* FindAndInsert(type key,Node<type>* ptr);
     void RRrotate(Node<type>* ptr);
     void LLrotate(Node<type>* ptr);
     void RLrotate(Node<type>* ptr);
     void LRrotate(Node<type>* ptr);
     void CheckBalance(Node<type>* ptr);
+    int SetBF(Node<type>* ptr);
+    int MaxHeight(Node<type>* ptr,int counter);
     Node<type>* FindKey(Node<type>* ptr, type key);
+    void PrintTree(Node<type>* ptr, int level);
 public:
-    int SetBF(Node<type>* ptr); // not tested tymczasowo do testow public
-    Node<type> *root; // przestaw private
-    int MaxHeight(Node<type>* ptr,int counter); // przestaw private
+    void Display()
+    {
+        PrintTree(root,0);
+    }
     void Remove(type key);
-
-    Node<type> *ptm=root; // tylko do testow
     void Add(type addVal);
+    int Height()
+    {
+        return MaxHeight(root,0);
+    }
+    const type getRootValue()
+    {
+        return root->value;
+    }
     AVLtree()
     {
         root = nullptr;
@@ -46,52 +56,6 @@ public:
 int main()
 {
     AVLtree<int> tr;
-    int add, remove;
-    char c = 0;
-
-    while(c!='q')
-    {
-        cin >> c;
-        switch(c)
-        {
-            case 's':
-                cout << tr.ptm->value;
-                break;
-            case 'u':
-                if(tr.ptm->up != nullptr)
-                    tr.ptm = tr.ptm->up;
-                else
-                    cout << "nullptr";
-                break;
-            case 'l':
-                if(tr.ptm->left != nullptr)
-                    tr.ptm = tr.ptm->left;
-                else
-                    cout << "nullptr";
-                break;
-            case 'r':
-                if(tr.ptm->right != nullptr)
-                    tr.ptm = tr.ptm->right;
-                else
-                    cout << "nullptr";
-                break;
-            case 'a':
-                cin >> add;
-                tr.Add(add);
-                tr.ptm = tr.root;
-                break;
-            case 'h':
-                cout << tr.MaxHeight(tr.ptm,0);
-                break;
-            case 'b':
-                cout << tr.SetBF(tr.ptm) <<endl;
-                break;
-            case 'd':
-                cin >> remove;
-                tr.Remove(remove);
-                break;
-        }
-    }
     return 0;
 }
 
@@ -101,7 +65,6 @@ void AVLtree<type>::Add(type addVal)
     if(root == nullptr)
     {
         root = new Node<type>;
-        ptm = root; /* USUN POTEM!!!!!!!!!!!!!!! */
         root->value = addVal;
     }
     else
@@ -361,5 +324,26 @@ void AVLtree<type>::Remove(type key)
     else
         cout << " Brak elementu do usunięcia!" << endl;
 }
+
+template<class type>
+void AVLtree<type>::PrintTree(Node<type> *ptr, int level)
+{
+    if(ptr != nullptr)
+    {
+        PrintTree(ptr->right, level + 1);
+        cout << endl;
+        for(int i=0; i<level; ++i)
+        {
+            cout << "       ";
+        }
+        if(ptr != root)
+            cout << ptr->value;
+        else
+            cout << "R: " << ptr->value;
+        cout << endl;
+        PrintTree(ptr->left, level + 1);
+    }
+}
+
 
 
