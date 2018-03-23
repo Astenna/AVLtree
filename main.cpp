@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 template <class type>
@@ -32,13 +33,28 @@ class AVLtree
     int MaxHeight(Node<type>* ptr,int counter);
     Node<type>* FindKey(Node<type>* ptr, type key);
     void PrintTree(Node<type>* ptr, int level);
+    void PreOrderRec(Node<type>* ptr, ofstream stream);
+    void PostOrderRec(Node<type>* ptr, ofstream stream);
+    void InOrderRec(Node<type>* ptr, ofstream stream);
 public:
+    void PreOrder(ofstream stream)
+    {
+        PreOrderRec(root, stream);
+    }
+    void PostOrder(ofstream stream)
+    {
+        PostOrderRec(root, stream);
+    }
+    void Remove(type key);
+    void InOrderRec(ofstream stream)
+    {
+        InOrderRec(root, stream);
+    }
+    void Add(type addVal);
     void Display()
     {
         PrintTree(root,0);
     }
-    void Remove(type key);
-    void Add(type addVal);
     int Height()
     {
         return MaxHeight(root,0);
@@ -342,6 +358,39 @@ void AVLtree<type>::PrintTree(Node<type> *ptr, int level)
             cout << "R: " << ptr->value;
         cout << endl;
         PrintTree(ptr->left, level + 1);
+    }
+}
+
+template<class type>
+void AVLtree<type>::PreOrderRec(Node<type> *ptr, ofstream stream)
+{
+    if(ptr != nullptr)
+    {
+        stream << ptr->value << "   ";
+        PreOrderRec(ptr->right, stream);
+        PreOrderRec(ptr->left, stream);
+    }
+}
+
+template<class type>
+void AVLtree<type>::PostOrderRec(Node<type> *ptr, ofstream stream)
+{
+    if(ptr != nullptr)
+    {
+        PreOrderRec(ptr->right, stream);
+        PreOrderRec(ptr->left, stream);
+        stream << ptr->value << "   ";
+    }
+}
+
+template<class type>
+void AVLtree<type>::InOrderRec(Node<type> *ptr, ofstream stream)
+{
+    if(ptr != nullptr)
+    {
+        PreOrderRec(ptr->right, stream);
+        stream << ptr->value << "   ";
+        PreOrderRec(ptr->left, stream);
     }
 }
 
