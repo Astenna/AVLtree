@@ -257,8 +257,7 @@ Node<type> *AVLtree<type>::findValue(Node<type>* ptr,type key)
         {
             ptr = ptr->left;
             findValue(ptr, key);
-        }
-        else
+        } else
             return nullptr;
     }
     else if(key > ptr->value)
@@ -267,11 +266,9 @@ Node<type> *AVLtree<type>::findValue(Node<type>* ptr,type key)
         {
             ptr = ptr->right;
             findValue(ptr, key);
-        }
-        else
+        } else
             return nullptr;
-    }
-    else
+    } else
         return ptr;
 }
 /* metoda do usuwania wezlow o danej wartosci */
@@ -294,8 +291,7 @@ void AVLtree<type>::remove(type key)
                     if(ptr->up->right == ptr)
                         ptr->up->right = nullptr;
                     balance(balanceFrom);
-                }
-                else
+                } else
                     root = nullptr;
                 delete(ptr);
             } /* ma jednego, prawego potomka */
@@ -342,13 +338,10 @@ void AVLtree<type>::remove(type key)
                 ptr->value = max;
                 balance(balanceFrom);
             }
-        }
-        else // CZY TO OK ZE TO NA CERR??!?!!
+        }else // CZY TO OK ZE TO NA CERR??!?!!
             cerr << "Brak elementu do usunięcia!" << endl;
-    }
-    else
+    } else
         cerr << "Drzewo jest puste!" << endl;
-
 }
 /* rekurencyjna metoda drukujaca drzewo na stdout */
 template<class type>
@@ -368,8 +361,7 @@ void AVLtree<type>::printTree(Node<type> *ptr, int level)
             cout << "R: " << ptr->value;
         cout << endl;
         printTree(ptr->left, level + 1);
-    }
-    else
+    } else
         cerr << "Drzewo jest puste!" << endl;
 }
 /* rekurencyjne przejscie PRE Order*/

@@ -34,14 +34,26 @@ int main()
             case 2:
                 cout << "Podaj element do dodania: ";
                 cin >> toAddOrDel;
+                if(cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore(1000,'\n');
+                    cerr << "Dodanie sie nie powiodlo! Nalezy podac liczbe!" << endl;
+                } else
+                    tr.add(toAddOrDel);
                 cout << endl;
-                tr.add(toAddOrDel);
                 break;
             case 3:
                 cout << "Podaj element do usuniecia: ";
                 cin  >> toAddOrDel;
+                if(cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore(1000,'\n');
+                    cerr << "Usuniecie sie nie powiodlo! Nalezy podac liczbe!" << endl;
+                } else
+                    tr.remove(toAddOrDel);
                 cout << endl;
-                tr.remove(toAddOrDel);
                 break;
             case 4:
                 cout << tr.height() << endl;
@@ -66,6 +78,8 @@ int main()
                 break;
             default:
                 cout << "Nie ma takiej opcji!" << endl;
+                cin.clear();
+                cin.ignore(1000,'\n');
                 break;
         }
         cout << endl;
