@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/constance/Pulpit/AVLtree/AVLtree.cpp">
+			<Option target="AVLtree"/>
+		</Unit>
+		<Unit filename="/home/constance/Pulpit/AVLtree/AVLtree.h">
+			<Option target="AVLtree"/>
+		</Unit>
 		<Unit filename="/home/constance/Pulpit/AVLtree/main.cpp">
 			<Option target="AVLtree"/>
 		</Unit>

@@ -123,6 +123,33 @@ AVLtree/fast:
 	$(MAKE) -f CMakeFiles/AVLtree.dir/build.make CMakeFiles/AVLtree.dir/build
 .PHONY : AVLtree/fast
 
+AVLtree.o: AVLtree.cpp.o
+
+.PHONY : AVLtree.o
+
+# target to build an object file
+AVLtree.cpp.o:
+	$(MAKE) -f CMakeFiles/AVLtree.dir/build.make CMakeFiles/AVLtree.dir/AVLtree.cpp.o
+.PHONY : AVLtree.cpp.o
+
+AVLtree.i: AVLtree.cpp.i
+
+.PHONY : AVLtree.i
+
+# target to preprocess a source file
+AVLtree.cpp.i:
+	$(MAKE) -f CMakeFiles/AVLtree.dir/build.make CMakeFiles/AVLtree.dir/AVLtree.cpp.i
+.PHONY : AVLtree.cpp.i
+
+AVLtree.s: AVLtree.cpp.s
+
+.PHONY : AVLtree.s
+
+# target to generate assembly for a file
+AVLtree.cpp.s:
+	$(MAKE) -f CMakeFiles/AVLtree.dir/build.make CMakeFiles/AVLtree.dir/AVLtree.cpp.s
+.PHONY : AVLtree.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... AVLtree"
+	@echo "... AVLtree.o"
+	@echo "... AVLtree.i"
+	@echo "... AVLtree.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

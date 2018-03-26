@@ -6,9 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/constance/Pulpit/AVLtree/main.cpp
+/home/constance/Pulpit/AVLtree/AVLtree.cpp
 iostream
 -
-fstream
--
+
+/home/constance/Pulpit/AVLtree/main.cpp
+AVLtree.cpp
+/home/constance/Pulpit/AVLtree/AVLtree.cpp
 
