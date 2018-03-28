@@ -63,7 +63,7 @@ public:
         if(root != nullptr)
             return root->value;
         else
-            cerr << "Drzewo jest puste!" << endl;
+            cerr << "Drzewo jest puste!";
         return 0;
     }
     AVLtree()
@@ -336,7 +336,7 @@ void AVLtree<type>::remove(type key)
                 ptr->value = max;
                 balance(balanceFrom);
             }
-        }else // CZY TO OK ZE TO NA CERR??!?!!
+        }else
             cerr << "Brak elementu do usunięcia!" << endl;
     } else
         cerr << "Drzewo jest puste!" << endl;
