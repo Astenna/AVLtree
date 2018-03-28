@@ -3,4 +3,4 @@ project(AVLtree)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(AVLtree main.cpp AVLtree.cpp AVLtree.h AVLtree.cpp)
+add_executable(AVLtree main.cpp AVLtree.cpp AVLtree.h AVLtree.cpp AVLtree.h)

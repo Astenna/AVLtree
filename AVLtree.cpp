@@ -1,10 +1,5 @@
 #include <iostream>
 using namespace std;
-// Czy wysokosc bez roota to po prostu zero tak jak jest czy na cerr tez?
-// aktualnie root = poziom 1, normalnie zwraca zero
-// height() -> maxGeight() itd.
-// exception przy usuwaniu z pustego drzewa czy tylko cerr tak jak jest?
-// probowac skrocic metode remove?
 template <class type>
 struct Node
 {
@@ -54,7 +49,10 @@ public:
     void add(type addVal);
     void display()
     {
-        printTree(root,0);
+        if(root != nullptr)
+            printTree(root,0);
+        else
+            cerr << "Drzewo jest puste!" << endl;
     }
     int height()
     {
@@ -361,8 +359,7 @@ void AVLtree<type>::printTree(Node<type> *ptr, int level)
             cout << "R: " << ptr->value;
         cout << endl;
         printTree(ptr->left, level + 1);
-    } else
-        cerr << "Drzewo jest puste!" << endl;
+    }
 }
 /* rekurencyjne przejscie PRE Order*/
 template<class type>
